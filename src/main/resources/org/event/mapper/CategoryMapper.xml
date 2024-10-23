@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.event.mapper.CategoryMapper">
+    <!--动态sql-->
+    <!--/*@Update("update category set category_alias = #{categoryAlias},category_name = #{categoryName},update_time = #{updateTime} where id = #{id}")*/
+-->
+    <update id="update" parameterType="org.event.pojo.Category">
+
+        update category
+        <set>
+            <if test="categoryAlias!=null">
+                category_alias = #{categoryAlias},
+            </if>
+            <if test="categoryName!=null">
+                category_name = #{categoryName},
+            </if>
+            <if test="updateTime!=null">
+                update_time = #{updateTime},
+            </if>
+
+        </set>
+           where id = #{id}
+    </update>
+    <select id="pageList" resultType="org.event.pojo.Category">
+        SELECT * FROM category
+        <where>
+            <if test="categoryAlias!=null">
+                and category_alias like concat('%',#{categoryAlias},'%')
+            </if>
+            <if test="categoryName!=null">
+                and category_name like concat('%',#{categoryName},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

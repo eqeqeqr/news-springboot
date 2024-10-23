@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.event.mapper.PermissionMapper">
+    <insert id="add">
+        INSERT INTO permission(name,create_time,create_user,icon,parent_id,url)
+
+        VALUES(#{name},#{createTime},#{createUser},#{icon},#{parentId},#{url})
+    </insert>
+    <!--动态查询 SELECT p.*,u.nickname as createUserName FROM `permission` p LEFT JOIN user u ON p.create_user=u.id where p.name LIKE '%个人%'-->
+    <select id="pageList" resultType="org.event.pojo.dao.PermissionDao">
+        SELECT p.*,u.nickname as createUserName FROM `permission` p LEFT JOIN user u ON p.create_user=u.id
+        <where>
+            <if test="name!=null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.event.mapper.ArticleMapper">
+    <!--动态sql-->
+    <select id="list" resultType="org.event.pojo.Article">
+        SELECT a.*,ur.role_id ,r.`name` as roleName,u.nickname as createUserName ,r.weight FROM `article` a LEFT JOIN user_role ur on a.create_user=ur.user_id LEFT JOIN role r on ur.role_id=r.id left JOIN user u on a.create_user=u.id
+        <where>
+            <if test="categoryId!=null">
+                and a.category_id=#{categoryId}
+            </if>
+            <if test="state!=null">
+                and a.state=#{state}
+            </if>
+           <if test="userId!=null or weight!=null">
+               and (a.create_user=#{userId} or  r.weight &lt; #{weight})
+           </if>
+            <if test="searchContent!=null">
+                and (a.title like concat('%',#{searchContent},'%') or a.content like concat('%',#{searchContent},'%'))
+            </if>
+        </where>
+        order by a.create_time desc
+    </select>
+</mapper>

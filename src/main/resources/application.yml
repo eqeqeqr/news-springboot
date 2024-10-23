@@ -1,0 +1,67 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/big_event?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 3
+  #ai:
+   # openai:
+      # 全局配置
+     # api-key:  # 申请的api-key
+    #  base-url: https://api.openai.com/    #openAi访问地址(不写默认)
+      # 嵌入API配置
+     # embedding:
+      #  options:
+       #   model: text-davinci-003
+      # 聊天API配置
+      #chat:
+        #指定某一个API配置(覆盖全局配置)
+       # api-key: 
+      #  base-url: https://api.openai.com/
+       # options:
+        #  model: gpt-3.5-turbo # 模型配置
+  mail:
+    # 指定邮件服务器地址
+    host: smtp.qq.com
+    # 登录账户
+    username: 
+    # 登录密码
+    password: 
+    # 端口
+    port: 465
+    # 默认编码
+    default-encoding: UTF-8
+    # 使用的协议
+    protocol: smtps
+    # 其他的属性
+    properties:
+      "mail.smtp.connectiontimeout": 5000
+      "mail.smtp.timeout": 3000
+      "mail.smtp.writetimeout": 5000
+      "mail.smtp.auth": true
+      "mail.smtp.starttls.enable": true
+      "mail.smtp.starttls.required": true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰命名
+aliyun:
+  oss:
+    ENDPOINT: 
+    ACCESS_KEY_ID: 
+    ACCESS_KEY_SECRET: 
+    BUCKET_NAME: 
+baidu:
+  qianfan:
+    access-key: 
+    secret-key: 
+    model: ERNIE-4.0-8K
+    temperature: 0.7
+
+
+
